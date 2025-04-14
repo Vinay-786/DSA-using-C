@@ -1,5 +1,6 @@
 #include "binary_search.hpp"
 #include "sorting.hpp"
+#include "list.hpp"
 #include "gtest/gtest.h"
 #include <gtest/gtest.h>
 #include <vector>
@@ -46,4 +47,19 @@ TEST(Sortingalgo, MergeSort) {
 TEST(Sortingalgo, QuickSort) {
   quick_sort(unSortedArray, 0, 9);
   testing::internal::ArrayEq(unSortedArray, sortedArray);
+}
+
+TEST(Sortingalgo, LinkedList) {
+  std::vector<int> array{1, 2, 4, 5, 6};
+  Node *linkedlist = LinkedList(array);
+
+  Node *temp1 = linkedlist;
+  std::vector<int>array2;
+  while (temp1 != nullptr) {
+    array2.push_back(temp1->data);
+    temp1 = temp1->link;
+  }
+
+  FreeList(linkedlist);
+  testing::internal::ArrayEq(array, array2);
 }
